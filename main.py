@@ -9,7 +9,7 @@
 #    '9) Выход'
 # - можете придумать свои пункты
 index = 0
-vocabulary = {'egg': 0.5, 'bear': 4.9}
+vocabulary = {'egg': 0.5, 'milk': 4.9, 'bread': 16}
 while index == 0:
     print("1) Создать запись")
     print('2) Список все записей')
