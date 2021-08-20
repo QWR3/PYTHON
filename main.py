@@ -26,30 +26,30 @@
 #   23, 544, 34              #вивело в консолі
 
 # st = input('введите строку : ')
-st = 'as 23 fdfdg544 34'
-result = ''
-arr = []
-i = 0
-while i < len(st):
-    start_index = int()
-    end_index = int()
-    if st[i].isdigit():
-        print('start', i, st[i])
-        start_index = i
-        while True:
-            next_i = i + 1
-            if next_i < len(st) and st[next_i].isdigit():
-                print('while', next_i, st[next_i])
-                end_index = next_i
-                i = next_i
-            else:
-                i = next_i
-                break
-
-        print(start_index, end_index, 'start-end')
-        arr.append(st[start_index:end_index+1])
-    i += 1
-print(arr)
+# # st = 'as 23 fdfdg544 34'
+# result = ''
+# arr = []
+# i = 0
+# while i < len(st):
+#     start_index = int()
+#     end_index = int()
+#     if st[i].isdigit():
+#         print('start', i, st[i])
+#         start_index = i
+#         while True:
+#             next_i = i + 1
+#             if next_i < len(st) and st[next_i].isdigit():
+#                 print('while', next_i, st[next_i])
+#                 end_index = next_i
+#                 i = next_i
+#             else:
+#                 i = next_i
+#                 break
+#
+#         print(start_index, end_index, 'start-end')
+#         arr.append(st[start_index:end_index+1])
+#     i += 1
+# print(arr)
 # БАГОДЕЛНЯ РОБОТАЕТ!
 # #################################################################################
 #
