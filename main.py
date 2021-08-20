@@ -125,17 +125,19 @@ greeting = 'Hello, world'
 
 #  написати декоратор до цієї функції, який замінює нижні підчеркування на пробіли і повертає це значення
 #
-# def decor(f):
-#     def inner(*args, **kwargs):
-#         item = f(*args, **kwargs)
-#         print(item.replace('_', ' '))
-#
-#     return inner
-#
-#
-# @decor
-# def pr():
-#     return 'Hello_boss_!!!'
-#
-#
-# pr()
+def decor(f):
+    def inner(*args, **kwargs):
+        item = f(*args, **kwargs)
+        item_replace = item.replace('_', ' ')
+        return (item_replace)
+
+    return inner
+
+
+@decor
+def pr():
+    return 'Hello_boss_!!!'
+
+
+result = pr()
+print(result)
