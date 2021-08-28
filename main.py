@@ -1,176 +1,122 @@
-# #ДЗ
+# 1)
+# создать класс Human (name, age)
+# создать два класса Prince и Cinderella:
+# у золушки должно быть имя возраст и размер ноги
+# у принца имя, возраст и размер найденой туфельки, так же должен быть метод который принимает лист золушек и ищет ту самую
 #
-# Создать класс Rectangle:
-# -конструктор принимает две стороны x,y
-# -описать арифметические методы:
-#   + сума площадей двух экземпляров класса
-#   - разница площадей
-#   == или площади равны
-#   != не равны
-#   >, < меньше или больше
-#   при вызове метода len() подсчитывать сумму сторон
+# класса золушки должна быть переменная count которая будет считать сколько экземпляров класса золушка было создано
+# и метод класса который будет показывать это количество
 
-class Rectangle:
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    def __add__(self, other):
-        return self.x * self.y + other.x * other.y
-
-    def __sub__(self, other):
-        return self.x * self.y - other.x * other.y
-
-    def __eq__(self, other):
-        return self.x * self.y == other.x * other.y
-
-    def __ne__(self, other):
-        return self.x * self.y != other.x * other.y
-
-    def __lt__(self, other):
-        return self.x * self.y < other.x * other.y
-
-    def __gt__(self, other):
-        return self.x * self.y > other.x * other.y
-
-    def __len__(self):
-        return self.x + self.y
-
-
-abcd = Rectangle(10, 20)
-klmn = Rectangle(5, 5)
-
-
-# print('+', abcd + klmn)
-# print('-', abcd - klmn)
-# print('==', abcd == klmn)
-# print('!=', abcd != klmn)
-# print('<', abcd < klmn)
-# print('>', abcd > klmn)
-# print('len', len(abcd))
-
-#   ###############################################################################
-# Це завдання на наслідування... все максимально розбити по классах
-#
-# 1) написати програму для запису відомостей про пасажирські перевезення
-
-# 2) перевезення відбувається трьома способами, літаком, машиною, поїздом,
-
-# 3) дані які треба буде зберігати:
-#   - вартість квитка(літак, поїзд)
-#   - кількість пасажирів(машина)
-#   - час в дорозі(всі)
-#   - час реєстрації(літак)
-#   - клас:перший,другий(літак)
-#   - вартість пального(машина)
-#   - км(машина)
-#   - місце: купе,св(поїзд)
-
-# 4) методи:
-#   - розрахунок вартості доїзду(машина)
-#   - загальний час перельоту(літак)
-#   - порівняти час в дорозі між двома будь якими транспортними засобами(двома об'єктами) - наприклад"літак на 5 годин швидше за поїзд"
-#   - вивести всі дані про перевезення(поїзд)
-class Traffic:
-    info = {}
-
-    def set_info(self, name, value):
-        self.info = {**self.info, name: value}
+class Human:
+    def __init__(self, name: str, age: int):
+        self.name = name
+        self.age = age
 
     def __str__(self):
-        return str(self.info)
-
-    def __repr__(self):
-        return self.__str__()
-
-    def __lt__(self, other):
-        return f'{self.__class__.__name__} на {other.info["час в дорозі"] - self.info["час в дорозі"]} годин швидше за {other.__class__.__name__}'
-
-    def __gt__(self, other):
-        return f'{self.__class__.__name__} на {self.info["час в дорозі"] - other.info["час в дорозі"]} годин повільніше за {other.__class__.__name__}'
+        return str(self.__dict__)
 
 
-class Car(Traffic):
-    def __init__(self, price_of_fuel: int, number_of_passengers: int, time_in_travel: int, kilometer: int, **kwargs):
-        self.info = {"кількість пасажирів": number_of_passengers, "час в дорозі": time_in_travel,
-                     "вартість пального": price_of_fuel, "км": kilometer, **kwargs}
-
-    def get_cost_of_travel(self):
-        return self.info["вартість пального"] * self.info["км"]
-
-
-class Airplane(Traffic):
-    def __init__(self, price: int, time_in_travel: int, time_of_registration, category: int, **kwargs):
-        self.info = {'вартість': price, "час в дорозі": time_in_travel, "час реєстрації": time_of_registration,
-                     "клас": category, **kwargs}
-
-    def get_all_time(self):
-        return self.info["час в дорозі"] + self.info["час реєстрації"]
-
-
-class Train(Traffic):
-    def __init__(self, price: int, time_in_travel: int, place: int, **kwargs):
-        self.info = {'вартість': price, "час в дорозі": time_in_travel, "місце": place, **kwargs}
-
-    def get_info(self):
-        return self.info
-
-
-car = Car(price_of_fuel=23, number_of_passengers=2, kilometer=34, time_in_travel=24)
-train = Train(time_in_travel=25, place=3, price=5)
-airplane = Airplane(price=534, time_in_travel=5, time_of_registration=2, category=1)
-# print(car > airplane)
-# print(car < airplane)
-# print(car.get_cost_of_travel())
-# print(airplane.get_all_time())
-# print(train.get_info())
-
-#   ######################################################################
-#
-# 1)Створити пустий list
-# 2)Створити клас Letter
-# 3) створити змінну класу __count.
-# 4) при створенні об'єкта має створюватись змінна об'єкта(пропертя) __text, для цієї змінної мають бути гетер і сетер
-# 5) при створені об'єкта __count має збільшуватися на 1
-# 6) має бути метод(метод класу) для виводу __сount
-# 7) має бути метод який записує в наш ліст текст з нашої змінної __text
-list_ = []
-
-
-class Letter():
+class Cinderella(Human):
     __count = 0
 
-    def __init__(self, text: str):
-        Letter.__count += 1
-        self.__text = text
-
-    @property
-    def text(self):
-        return self.__text
-
-    @text.setter
-    def text(self, new_text: str):
-        self.__text = new_text
-
-    @text.getter
-    def text(self):
-        return self.__text
-
-    def write_in_list(self):
-        global list_
-        list_.append(self.__text)
+    def __init__(self, name: str, age: int, size: int):
+        super().__init__(name=name, age=age)
+        Cinderella.__count += 1
+        self.size = size
 
     def get_count(self):
         return self.__count
 
 
-x = Letter(text='xx')
-z = Letter(text='zz')
-y = Letter(text='yy')
-print(x.text, z.text, y.text)
-print(x.get_count())
-x.text = '(*.*)'
-x.write_in_list()
-z.write_in_list()
-y.write_in_list()
-print(list_)
+class Prince(Human):
+    def __init__(self, name: str, age: int, chosen_size: int):
+        super().__init__(name=name, age=age)
+        self.chosen_size = chosen_size
+
+    def search(self, list_of_cinderellas: list):
+        for cinderella in list_of_cinderellas:
+            if cinderella.size == self.chosen_size:
+                return cinderella
+
+
+# cinderella1 = Cinderella(name='cinderella1', age=18, size=39)
+# cinderella2 = Cinderella(name='cinderella2', age=19, size=40)
+# prince1 = Prince(name='prince1', age=20, chosen_size=39)
+# print(prince1.search([cinderella1, cinderella2]))
+# print(cinderella1.get_count())
+
+# 2)
+# Создать класс записной книжки
+# -А каждая манипуляция над ней должна быть методом класса
+# -Все данные сохраняем в переменной класса
+#
+#
+# реализовать записную книжку покупок:
+# - каждая запись должна содержать название покупки и ее цену
+# -сделать менюшку для работы с записной книжкой:
+#     '1) Создать запись'
+#     '2) Список все записей'
+#     '3) Общая сумма всех покупок'
+#     '4) Самая дорогая покупка'
+#     '5) Поиск по названию покупки'
+#     '9) Выход'
+# - можете придумать свои пункты
+
+class Book:
+    records = {}
+
+    def __str__(self):
+        return str(self.records)
+
+    def get_book(self):
+        return str(self.records)
+
+    def add_record(self, name: str, price: int):
+        self.records = {**self.records, name: price}
+
+    def sum(self):
+        sum = 0
+        for name in self.records:
+            sum += self.records[name]
+
+        return sum
+
+    def max_price(self):
+        res = max(self.records.values())
+        for k, v in self.records.items():
+            if v == res:
+                return k + ':' + str(v)
+
+    def search(self, world):
+        res = list(filter(lambda x: x.lower() == world.lower(), self.records.keys()))
+        if res:
+            return world + ' : ' + str(self.records[res[0]])
+        else:
+            return 'not found'
+
+
+book = Book()
+
+while True:
+    print('1) Создать запись')
+    print('2) Список все записей')
+    print('3) Общая сумма всех покупок')
+    print('4) Самая дорогая покупка')
+    print('5) Поиск по названию покупки')
+    print('9) Выход')
+    choise = int(input('ваш выбор: '))
+    if choise == 1:
+        name = input('назва :')
+        price = int(input('ціна :'))
+        book.add_record(name=name, price=price)
+    elif choise == 2:
+        print(book.get_book())
+    elif choise == 3:
+        print(book.sum())
+    elif choise == 4:
+        print(book.max_price())
+    elif choise == 5:
+        search = input("поиск: ")
+        print(book.search(search))
+    elif choise == 9:
+        break
