@@ -1,56 +1,11 @@
-# 1)
-# создать класс Human (name, age)
-# создать два класса Prince и Cinderella:
-# у золушки должно быть имя возраст и размер ноги
-# у принца имя, возраст и размер найденой туфельки, так же должен быть метод который принимает лист золушек и ищет ту самую
+# мучить вас сильно не буду
+# просто разберите лекцию
 #
-# класса золушки должна быть переменная count которая будет считать сколько экземпляров класса золушка было создано
-# и метод класса который будет показывать это количество
-
-class Human:
-    def __init__(self, name: str, age: int):
-        self.name = name
-        self.age = age
-
-    def __str__(self):
-        return str(self.__dict__)
-
-
-class Cinderella(Human):
-    __count = 0
-
-    def __init__(self, name: str, age: int, size: int):
-        super().__init__(name=name, age=age)
-        Cinderella.__count += 1
-        self.size = size
-
-    def get_count(self):
-        return self.__count
-
-
-class Prince(Human):
-    def __init__(self, name: str, age: int, chosen_size: int):
-        super().__init__(name=name, age=age)
-        self.chosen_size = chosen_size
-
-    def search(self, list_of_cinderellas: list):
-        for cinderella in list_of_cinderellas:
-            if cinderella.size == self.chosen_size:
-                return cinderella
-
-
-# cinderella1 = Cinderella(name='cinderella1', age=18, size=39)
-# cinderella2 = Cinderella(name='cinderella2', age=19, size=40)
-# prince1 = Prince(name='prince1', age=20, chosen_size=39)
-# print(prince1.search([cinderella1, cinderella2]))
-# print(cinderella1.get_count())
-
-# 2)
+# и переделайте это задание:
+#
 # Создать класс записной книжки
 # -А каждая манипуляция над ней должна быть методом класса
 # -Все данные сохраняем в переменной класса
-#
-#
 # реализовать записную книжку покупок:
 # - каждая запись должна содержать название покупки и ее цену
 # -сделать менюшку для работы с записной книжкой:
@@ -61,9 +16,26 @@ class Prince(Human):
 #     '5) Поиск по названию покупки'
 #     '9) Выход'
 # - можете придумать свои пункты
+#
+# но в этот раз данные записываем в файл
+
+import json
+
 
 class Book:
-    records = {}
+    try:
+        file = open('book.json', 'r+')
+    except FileNotFoundError as e:
+        print('файл не найден')
+        print('создаем новый файл')
+        file = open('book.json', 'w+')
+    finally:
+        if file.read() == '':
+            file.write('{}')
+        file.close()
+
+    file = open('book.json', 'r+')
+    records = json.load(file)
 
     def __str__(self):
         return str(self.records)
@@ -94,16 +66,22 @@ class Book:
         else:
             return 'not found'
 
+    def write_in_file(self):
+        self.file.seek(0)
+        self.file.truncate()
+        json.dump(self.records, self.file)
+        self.file.close()
+
 
 book = Book()
 
 while True:
     print('1) Создать запись')
-    print('2) Список все записей')
+    print('2) Список всех записей')
     print('3) Общая сумма всех покупок')
     print('4) Самая дорогая покупка')
     print('5) Поиск по названию покупки')
-    print('9) Выход')
+    print('9) Сохранить и выйти')
     choise = int(input('ваш выбор: '))
     if choise == 1:
         name = input('назва :')
@@ -119,4 +97,5 @@ while True:
         search = input("поиск: ")
         print(book.search(search))
     elif choise == 9:
+        book.write_in_file()
         break
